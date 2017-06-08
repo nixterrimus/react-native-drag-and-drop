@@ -1,0 +1,3 @@
+rootProject.name = 'helloDnD'
+
+include ':app'
