@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import Draggable from "./Draggable";
 
 export default class helloDnD extends Component {
   render() {
@@ -12,36 +13,38 @@ export default class helloDnD extends Component {
           alignItems: "center"
         }}
       >
-        <View
-          style={{
-            backgroundColor: "#F56218",
-            width: 200,
-            height: 200,
-            borderRadius: 8,
-            justifyContent: "flex-end",
-            alignItems: "center",
-            paddingBottom: 12
-          }}
-        >
+        <Draggable>
           <View
             style={{
-              backgroundColor: "#F9F4E0",
-              width: 80,
-              height: 80,
-              borderRadius: 40,
-              marginBottom: 20
-            }}
-          />
-          <Text
-            style={{
-              color: "white",
-              textAlign: "center",
-              fontWeight: "600"
+              backgroundColor: "#F56218",
+              width: 200,
+              height: 200,
+              borderRadius: 8,
+              justifyContent: "flex-end",
+              alignItems: "center",
+              paddingBottom: 12
             }}
           >
-            Hello, from React Native
-          </Text>
-        </View>
+            <View
+              style={{
+                backgroundColor: "#F9F4E0",
+                width: 80,
+                height: 80,
+                borderRadius: 40,
+                marginBottom: 20
+              }}
+            />
+            <Text
+              style={{
+                color: "white",
+                textAlign: "center",
+                fontWeight: "600"
+              }}
+            >
+              Hello, from React Native
+            </Text>
+          </View>
+        </Draggable>
       </View>
     );
   }
