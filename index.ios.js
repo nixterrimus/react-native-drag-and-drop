@@ -1,8 +1,21 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  AlertIOS
+} from "react-native";
 import Draggable from "./Draggable";
 
 export default class helloDnD extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      labelText: "Hello from React Native"
+    };
+  }
   render() {
     return (
       <View
@@ -13,7 +26,7 @@ export default class helloDnD extends Component {
           alignItems: "center"
         }}
       >
-        <Draggable>
+        <Draggable content={this.state.labelText}>
           <View
             style={{
               backgroundColor: "#F56218",
@@ -34,15 +47,23 @@ export default class helloDnD extends Component {
                 marginBottom: 20
               }}
             />
-            <Text
-              style={{
-                color: "white",
-                textAlign: "center",
-                fontWeight: "600"
+            <TouchableOpacity
+              onPress={() => {
+                AlertIOS.prompt("Update text", null, text =>
+                  this.setState({ labelText: text })
+                );
               }}
             >
-              Hello, from React Native
-            </Text>
+              <Text
+                style={{
+                  color: "white",
+                  textAlign: "center",
+                  fontWeight: "600"
+                }}
+              >
+                {this.state.labelText}
+              </Text>
+            </TouchableOpacity>
           </View>
         </Draggable>
       </View>

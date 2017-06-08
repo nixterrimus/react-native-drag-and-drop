@@ -10,41 +10,21 @@
 
 #import <React/RCTViewManager.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "RCTDraggableTextView.h"
 
-@interface RCTDraggable : RCTViewManager <UIDragInteractionDelegate>
+@interface RCTDraggable : RCTViewManager
 @end
 
 @implementation RCTDraggable
 
 RCT_EXPORT_MODULE()
 
+RCT_EXPORT_VIEW_PROPERTY(content, NSString)
+
 - (UIView *)view
 {
-  UIView *draggableView = [[UIView alloc] init];
-  if (@available(iOS 11.0, *)) {
-    UIDragInteraction *dragInteraction = [[UIDragInteraction alloc] initWithDelegate:self];
-    [draggableView addInteraction:dragInteraction];
-  }
+  UIView *draggableView = [[RCTDraggableTextView alloc] initWithFrame:CGRectZero];
   return draggableView;
 }
 
-- (NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction itemsForBeginningSession:(id<UIDragSession>)session {
-  if (@available(iOS 11.0, *)) {
-    NSString *string = @"Hello, from React Native";
-    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    NSItemProvider *itemProvider = [[NSItemProvider  alloc] init];
-    [itemProvider
-     registerDataRepresentationForTypeIdentifier:(NSString *)kUTTypePlainText
-     visibility:NSItemProviderRepresentationVisibilityAll
-     loadHandler:^NSProgress * _Nullable(void (^ _Nonnull completionHandler)(NSData * _Nullable, NSError * _Nullable)) {
-       completionHandler(data, NULL);
-       return nil;
-     }];
-    return @[
-             [[UIDragItem alloc] initWithItemProvider:itemProvider]
-             ];
-  } else {
-    return @[];
-  }
-}
 @end
