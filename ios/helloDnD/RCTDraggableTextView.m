@@ -8,6 +8,8 @@
 
 #import "RCTDraggableTextView.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <React/UIView+React.h>
+#import <React/RCTRootView.h>
 
 @interface RCTDraggableTextView() <UIDragInteractionDelegate>
 @end
@@ -38,12 +40,42 @@
        completionHandler(data, NULL);
        return nil;
      }];
+
+    // When we've determined that there's a touch, cancel what RN is doing
+    [self cancelCurrentReactTouch];
+
     return @[
              [[UIDragItem alloc] initWithItemProvider:itemProvider]
              ];
   } else {
     return @[];
   }
+}
+
+// Technique from Wix's interactable library
+- (void)cancelCurrentReactTouch
+{
+  RCTRootView *view = [self getRootView];
+  if (view != nil)
+  {
+    [(RCTRootView*)view cancelTouches];
+  }
+}
+
+- (RCTRootView*)getRootView
+{
+  UIView *view = self;
+  while (view.superview != nil)
+  {
+    view = view.superview;
+    if ([view isKindOfClass:[RCTRootView class]]) break;
+  }
+
+  if ([view isKindOfClass:[RCTRootView class]])
+  {
+    return (RCTRootView*)view;
+  }
+  return nil;
 }
 
 
