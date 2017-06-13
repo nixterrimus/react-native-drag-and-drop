@@ -28,6 +28,14 @@
   return self;
 }
 
+- (void)dragInteraction:(UIDragInteraction *)interaction sessionWillBegin:(id<UIDragSession>)session {
+  self.alpha = 0.5;
+}
+
+- (void)dragInteraction:(UIDragInteraction *)interaction session:(id<UIDragSession>)session didEndWithOperation:(UIDropOperation)operation {
+  self.alpha = 1.0;
+}
+
 - (NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction itemsForBeginningSession:(id<UIDragSession>)session {
   if (@available(iOS 11.0, *)) {
     NSString *string = self.content;
