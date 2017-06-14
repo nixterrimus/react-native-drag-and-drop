@@ -7,13 +7,34 @@ import {
   TouchableOpacity,
   AlertIOS
 } from "react-native";
-import Draggable from "./Draggable";
 
+import Draggable from "./Draggable";
+import Droppable from "./Droppable";
+
+class ColorSwatch extends Component {
+  render() {
+    const { color } = this.props;
+    return (
+      <Draggable>
+        <View
+          style={{
+            width: 66,
+            height: 66,
+            borderRadius: 33,
+            backgroundColor: color
+          }}
+        />
+      </Draggable>
+    );
+  }
+}
 export default class helloDnD extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      labelText: "Hello from React Native"
+      labelText: "Hello from React Native",
+      textColor: "#F9F4E0",
+      backgroundColor: "#F56218"
     };
   }
   render() {
@@ -29,7 +50,7 @@ export default class helloDnD extends Component {
         <Draggable content={this.state.labelText}>
           <View
             style={{
-              backgroundColor: "#F56218",
+              backgroundColor: this.state.backgroundColor,
               width: 200,
               height: 200,
               borderRadius: 8,
@@ -38,15 +59,17 @@ export default class helloDnD extends Component {
               paddingBottom: 12
             }}
           >
-            <View
-              style={{
-                backgroundColor: "#F9F4E0",
-                width: 80,
-                height: 80,
-                borderRadius: 40,
-                marginBottom: 20
-              }}
-            />
+            <Droppable>
+              <View
+                style={{
+                  backgroundColor: this.state.textColor,
+                  width: 88,
+                  height: 88,
+                  borderRadius: 44,
+                  marginBottom: 20
+                }}
+              />
+            </Droppable>
             <TouchableOpacity
               onPress={() => {
                 AlertIOS.prompt("Update text", null, text =>
@@ -56,7 +79,7 @@ export default class helloDnD extends Component {
             >
               <Text
                 style={{
-                  color: "white",
+                  color: this.state.textColor,
                   textAlign: "center",
                   fontWeight: "600"
                 }}
@@ -66,6 +89,26 @@ export default class helloDnD extends Component {
             </TouchableOpacity>
           </View>
         </Draggable>
+
+        <View
+          style={{
+            marginTop: 40
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              width: 400,
+              justifyContent: "space-between"
+            }}
+          >
+            <ColorSwatch color="#E39494" />
+            <ColorSwatch color="#5B5778" />
+            <ColorSwatch color="#A3C6CC" />
+            <ColorSwatch color="#DADBC1" />
+            <ColorSwatch color="#FCE8B8" />
+          </View>
+        </View>
       </View>
     );
   }
