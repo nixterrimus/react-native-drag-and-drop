@@ -28,12 +28,10 @@
   return self;
 }
 
-- (void)dragInteraction:(UIDragInteraction *)interaction sessionWillBegin:(id<UIDragSession>)session {
-  self.alpha = 0.5;
-}
-
-- (void)dragInteraction:(UIDragInteraction *)interaction session:(id<UIDragSession>)session didEndWithOperation:(UIDropOperation)operation {
-  self.alpha = 1.0;
+- (UITargetedDragPreview *)dragInteraction:(UIDragInteraction *)interaction previewForLiftingItem:(UIDragItem *)item session:(id<UIDragSession>)session {
+  UIDragPreviewParameters *params = [[UIDragPreviewParameters alloc] init];
+  params.backgroundColor = [UIColor clearColor];
+  return [[UITargetedDragPreview alloc] initWithView:self parameters: params];
 }
 
 - (NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction itemsForBeginningSession:(id<UIDragSession>)session {
