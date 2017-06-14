@@ -28,6 +28,12 @@
   return self;
 }
 
+- (UITargetedDragPreview *)dragInteraction:(UIDragInteraction *)interaction previewForLiftingItem:(UIDragItem *)item session:(id<UIDragSession>)session {
+  UIDragPreviewParameters *params = [[UIDragPreviewParameters alloc] init];
+  params.backgroundColor = [UIColor clearColor];
+  return [[UITargetedDragPreview alloc] initWithView:self parameters: params];
+}
+
 - (NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction itemsForBeginningSession:(id<UIDragSession>)session {
   if (@available(iOS 11.0, *)) {
     NSString *string = self.content;
