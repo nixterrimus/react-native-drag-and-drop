@@ -26,7 +26,7 @@ export default class helloDnD extends Component {
           alignItems: "center"
         }}
       >
-        <Draggable content={this.state.labelText}>
+        <Draggable content={{ text: this.state.labelText }}>
           <View
             style={{
               backgroundColor: "#F56218",
@@ -65,6 +65,21 @@ export default class helloDnD extends Component {
               </Text>
             </TouchableOpacity>
           </View>
+        </Draggable>
+        <Draggable
+          content={{
+            text: "This is some text I got from a React Native app"
+          }}
+        >
+          <Text>This is some text I got from a React Native app</Text>
+        </Draggable>
+
+        <Draggable
+          content={{
+            uri: "https://www.khanacademy.org/"
+          }}
+        >
+          <Text>Khan Academy</Text>
         </Draggable>
       </View>
     );
