@@ -34,25 +34,52 @@
   return [[UITargetedDragPreview alloc] initWithView:self parameters: params];
 }
 
+- (NSItemProvider *)itemForSharing:(NSDictionary *)content {
+  if (@available(iOS 11.0, *)) {
+    // Sharing Text
+    if (content[@"text"]){
+      NSString *string = content[@"text"];
+      NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+      NSItemProvider *itemProvider = [[NSItemProvider  alloc] init];
+      [itemProvider
+       registerDataRepresentationForTypeIdentifier:(NSString *)kUTTypePlainText
+       visibility:NSItemProviderRepresentationVisibilityAll
+       loadHandler:^NSProgress * _Nullable(void (^ _Nonnull completionHandler)(NSData * _Nullable, NSError * _Nullable)) {
+         completionHandler(data, NULL);
+         return nil;
+       }];
+      return itemProvider;
+    }
+
+    // Sharing URLs
+    else if (content[@"uri"]){
+      NSURL *url = [[NSURL alloc] initWithString:content[@"uri"]];
+      NSItemProvider *itemProvider = [[NSItemProvider alloc]initWithObject:url];
+      return itemProvider;
+    }
+
+    // Sharing Something else, not possible
+    else {
+      return nil;
+    }
+  } else {
+    return nil;
+  }
+}
+
 - (NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction itemsForBeginningSession:(id<UIDragSession>)session {
   if (@available(iOS 11.0, *)) {
-    NSString *string = self.content;
-    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    NSItemProvider *itemProvider = [[NSItemProvider  alloc] init];
-    [itemProvider
-     registerDataRepresentationForTypeIdentifier:(NSString *)kUTTypePlainText
-     visibility:NSItemProviderRepresentationVisibilityAll
-     loadHandler:^NSProgress * _Nullable(void (^ _Nonnull completionHandler)(NSData * _Nullable, NSError * _Nullable)) {
-       completionHandler(data, NULL);
-       return nil;
-     }];
+    NSItemProvider *itemProvider = [self itemForSharing:self.content];
 
-    // When we've determined that there's a touch, cancel what RN is doing
-    [self cancelCurrentReactTouch];
+    if (itemProvider != nil){
+      [self cancelCurrentReactTouch];
 
-    return @[
-             [[UIDragItem alloc] initWithItemProvider:itemProvider]
-             ];
+      return @[
+               [[UIDragItem alloc] initWithItemProvider:itemProvider]
+       ];
+    } else {
+      return @[];
+    }
   } else {
     return @[];
   }

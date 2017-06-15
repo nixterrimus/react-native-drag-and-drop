@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface RCTDraggableTextView : UIView
-@property (nonatomic, strong) NSString *content;
+@property (nonatomic, strong) NSDictionary *content;
 @end
