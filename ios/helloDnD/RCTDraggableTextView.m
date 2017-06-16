@@ -79,6 +79,10 @@
   }
 }
 
+- (UITargetedDragPreview *)dragInteraction:(UIDragInteraction *)interaction previewForCancellingItem:(UIDragItem *)item withDefault:(UITargetedDragPreview *)defaultPreview {
+  return defaultPreview;
+}
+
 - (NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction itemsForBeginningSession:(id<UIDragSession>)session {
   if (@available(iOS 11.0, *)) {
     NSItemProvider *itemProvider = [self itemForSharing:self.content];
