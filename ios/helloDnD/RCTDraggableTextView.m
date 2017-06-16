@@ -67,6 +67,18 @@
   }
 }
 
+- (void)dragInteraction:(UIDragInteraction *)interaction sessionWillBegin:(id<UIDragSession>)session {
+  if (self.onDragBegan){
+    self.onDragBegan(@{});
+  }
+}
+
+- (void)dragInteraction:(UIDragInteraction *)interaction session:(id<UIDragSession>)session didEndWithOperation:(UIDropOperation)operation {
+  if (self.onDragEnd){
+    self.onDragEnd(@{});
+  }
+}
+
 - (NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction itemsForBeginningSession:(id<UIDragSession>)session {
   if (@available(iOS 11.0, *)) {
     NSItemProvider *itemProvider = [self itemForSharing:self.content];
@@ -75,7 +87,7 @@
       [self cancelCurrentReactTouch];
 
       return @[
-               [[UIDragItem alloc] initWithItemProvider:itemProvider]
+           [[UIDragItem alloc] initWithItemProvider:itemProvider]
        ];
     } else {
       return @[];

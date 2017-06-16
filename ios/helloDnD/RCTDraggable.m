@@ -20,6 +20,8 @@
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_VIEW_PROPERTY(content, NSDictionary)
+RCT_EXPORT_VIEW_PROPERTY(onDragBegan, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onDragEnd, RCTDirectEventBlock)
 
 - (UIView *)view
 {
