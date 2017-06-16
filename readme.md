@@ -18,8 +18,8 @@ It's one of `uri` or `text`.
 
 Dragging some text:
 
-```
-import Draggable from "draggable";
+```javascript
+import { Draggable } from "draggable";
 
 <Draggable
     content={{
@@ -32,8 +32,8 @@ import Draggable from "draggable";
 
 Dragging a URL:
 
-```
-import Draggable from "draggable";
+```javascript
+import { Draggable } from "draggable";
 
 <Draggable
     content={{
