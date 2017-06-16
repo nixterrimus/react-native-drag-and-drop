@@ -30,7 +30,7 @@ content={{
 }}
 ```
 
-**`onDragBegan` - callback when dragging begins
+**`onDragBegan`** - callback when dragging begins
 
 This callback is called once when the drag begins.  It receives no params and has no return value.
 
@@ -40,7 +40,7 @@ onDragBegan={() => {
 }}
 ```
 
-**`onDragEnd` - callback when dragging begins
+**`onDragEnd`** - callback when dragging begins
 
 This callback is called once when the drag ends.  It receives no params and has no return value.
 
