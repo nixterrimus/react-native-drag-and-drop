@@ -5,83 +5,147 @@ import {
   Text,
   View,
   TouchableOpacity,
-  AlertIOS
+  AlertIOS,
+  ScrollView
 } from "react-native";
-import Draggable from "./Draggable";
+import { Draggable } from "./Draggable";
 
-export default class helloDnD extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      labelText: "Hello from React Native"
-    };
-  }
+class Example extends Component {
   render() {
     return (
       <View
         style={{
-          flex: 1,
-          backgroundColor: "#F5FCFF",
-          justifyContent: "center",
-          alignItems: "center"
+          marginTop: 10,
+          paddingVertical: 10,
+          marginHorizontal: 12
         }}
       >
-        <Draggable content={{ text: this.state.labelText }}>
-          <View
-            style={{
-              backgroundColor: "#F56218",
-              width: 200,
-              height: 200,
-              borderRadius: 8,
-              justifyContent: "flex-end",
-              alignItems: "center",
-              paddingBottom: 12
+        <Text
+          style={{
+            fontSize: 18,
+            fontWeight: "700",
+            marginBottom: 5
+          }}
+        >
+          {this.props.title}
+        </Text>
+        <View
+          style={{
+            alignItems: "center",
+            borderTopWidth: StyleSheet.hairlineWidth,
+            borderColor: "black",
+            paddingTop: 10
+          }}
+        >
+          {this.props.children}
+        </View>
+      </View>
+    );
+  }
+}
+export default class helloDnD extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      labelText: "Hello from React Native",
+      dragging: false
+    };
+  }
+  render() {
+    return (
+      <ScrollView
+        style={{
+          flex: 1,
+          backgroundColor: "#F5FCFF",
+          marginTop: 22
+        }}
+        contentContainerStyle={{
+          paddingVertical: 12
+        }}
+      >
+        <Example title="Drag some text">
+          <Draggable
+            content={{
+              text: "This is some text I got from a React Native app"
             }}
           >
             <View
               style={{
-                backgroundColor: "#F9F4E0",
-                width: 80,
-                height: 80,
-                borderRadius: 40,
-                marginBottom: 20
-              }}
-            />
-            <TouchableOpacity
-              onPress={() => {
-                AlertIOS.prompt("Update text", null, text =>
-                  this.setState({ labelText: text })
-                );
+                paddingHorizontal: 12,
+                paddingVertical: 6,
+                borderWidth: StyleSheet.hairlineWidth,
+                borderColor: "red",
+                backgroundColor: "white"
               }}
             >
-              <Text
+              <Text>This is some text I got from a React Native app</Text>
+            </View>
+          </Draggable>
+        </Example>
+
+        <Example title="Drag a URL">
+          <Draggable
+            content={{
+              uri: "https://www.khanacademy.org/"
+            }}
+          >
+            <Text
+              style={{
+                paddingVertical: 12,
+                paddingHorizontal: 22,
+                backgroundColor: "rgba(255,255,255,0.5)",
+                fontWeight: '600'
+              }}
+            >
+              🌐 Khan Academy
+            </Text>
+          </Draggable>
+        </Example>
+
+        <Example title="Cancelling a touchable when a drag begins">
+          <Draggable content={{ text: this.state.labelText }}>
+            <View
+              style={{
+                backgroundColor: "#F56218",
+                width: 200,
+                height: 200,
+                borderRadius: 8,
+                justifyContent: "flex-end",
+                alignItems: "center",
+                paddingBottom: 12
+              }}
+            >
+              <View
                 style={{
-                  color: "white",
-                  textAlign: "center",
-                  fontWeight: "600"
+                  backgroundColor: "#F9F4E0",
+                  width: 80,
+                  height: 80,
+                  borderRadius: 40,
+                  marginBottom: 20
+                }}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  AlertIOS.prompt("Update text", null, text =>
+                    this.setState({ labelText: text })
+                  );
                 }}
               >
-                {this.state.labelText}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </Draggable>
-        <Draggable
-          content={{
-            text: "This is some text I got from a React Native app"
-          }}
-        >
-          <Text>This is some text I got from a React Native app</Text>
-        </Draggable>
+                <Text
+                  style={{
+                    color: "white",
+                    textAlign: "center",
+                    fontWeight: "600"
+                  }}
+                >
+                  {this.state.labelText}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Draggable>
+        </Example>
 
-        <Draggable
-          content={{
-            uri: "https://www.khanacademy.org/"
-          }}
-        >
-          <Text>Khan Academy</Text>
-        </Draggable>
-      </View>
+      </ScrollView>
     );
   }
 }
