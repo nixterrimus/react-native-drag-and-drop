@@ -1,5 +1,7 @@
 # Draggable for React Native
 
+![Sample](https://github.com/nixterrimus/react-native-drag-and-drop/raw/master/sample.png)
+
 Bridges iOS 11's drag and drop features to React native.
 
 For this to work you need to run this code on an iPad running iOS 11.
