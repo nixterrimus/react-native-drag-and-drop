@@ -1,11 +1,24 @@
 // @flow
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import { requireNativeComponent } from "react-native";
 
-export const DraggableWithoutFeedback = requireNativeComponent(
-  "NSRDraggableView",
-  null
-);
+NativeDraggableItem = requireNativeComponent("NSRDraggableView", null);
+
+function mapInputContentToNativeContent(content) {
+  if (Array.isArray(content)) {
+    return content;
+  }
+  return [content];
+}
+
+export const DraggableWithoutFeedback = props => {
+  const propsForNativeView = {
+    ...props,
+    content: mapInputContentToNativeContent(props.content)
+  };
+  
+  return <NativeDraggableItem {...propsForNativeView} />;
+};
 
 type DraggableContent =
   | {

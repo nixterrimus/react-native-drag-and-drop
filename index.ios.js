@@ -85,20 +85,70 @@ export default class helloDnD extends Component {
 
         <Example title="Drag a URL">
           <Draggable
-            content={{
-              uri: "https://www.khanacademy.org/"
-            }}
+            content={[
+              {
+                uri: "https://www.khanacademy.org/"
+              }
+            ]}
           >
             <Text
               style={{
                 paddingVertical: 12,
                 paddingHorizontal: 22,
                 backgroundColor: "rgba(255,255,255,0.5)",
-                fontWeight: '600'
+                fontWeight: "600"
               }}
             >
               🌐 Khan Academy
             </Text>
+          </Draggable>
+        </Example>
+
+        <Example title="Drag a few things">
+          <Draggable
+            content={[
+              {
+                uri: "https://www.khanacademy.org/partner-content/pixar/simulation/hair-simulation-101/v/hair-simulation-intro"
+              },
+              {
+                uri: "https://www.khanacademy.org/partner-content/pixar/simulation/hair-simulation-101/v/sim1-fix"
+              },
+              {
+                uri: "https://www.khanacademy.org/partner-content/pixar/simulation/hair-simulation-101/v/sim2-fix"
+              },
+              {
+                uri: "https://www.khanacademy.org/partner-content/pixar/simulation/hair-simulation-101/v/sim3-launch"
+              },
+              {
+                uri: "https://www.khanacademy.org/partner-content/pixar/simulation/hair-simulation-101/v/sim4-fix"
+              },
+              {
+                uri: "https://www.khanacademy.org/partner-content/pixar/simulation/hair-simulation-101/v/video5-launch"
+              },
+              {
+                uri: "https://www.khanacademy.org/partner-content/pixar/simulation/hair-simulation-101/v/gtk-launch"
+              }
+            ]}
+          >
+            <View
+              style={{
+                paddingVertical: 12,
+                paddingHorizontal: 22,
+                backgroundColor: "rgba(255,255,255,0.5)"
+              }}
+            >
+              <Text
+                style={{
+                  fontWeight: "600",
+                  marginBottom: 6
+                }}
+              >
+                🌐 Hair simulation 101 (7 videos)
+              </Text>
+              <Text>
+                Explore how millions of hairs can be simulated using a mass spring system.
+              </Text>
+            </View>
           </Draggable>
         </Example>
 
