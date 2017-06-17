@@ -6,16 +6,16 @@
 //  Copyright © 2017 Facebook. All rights reserved.
 //
 
-#import "RCTDraggableTextView.h"
+#import "NSRDraggableView.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <React/UIView+React.h>
 #import <React/RCTRootView.h>
 
-@interface RCTDraggableTextView() <UIDragInteractionDelegate>
+@interface NSRDraggableView() <UIDragInteractionDelegate>
 @end
 
 
-@implementation RCTDraggableTextView
+@implementation NSRDraggableView
 
 - (instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];

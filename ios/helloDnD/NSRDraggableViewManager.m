@@ -1,21 +1,19 @@
 //
-//  RCTDraggable.m
+//  NSRDraggableViewManager.m
 //  helloDnD
 //
-//  Created by Nicholas Rowe on 6/8/17.
+//  Created by Nick Rowe on 6/17/17.
 //  Copyright © 2017 Facebook. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
 #import <React/RCTViewManager.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "RCTDraggableTextView.h"
 
-@interface RCTDraggable : RCTViewManager
-@end
+#import "NSRDraggableViewManager.h"
+#import "NSRDraggableView.h"
 
-@implementation RCTDraggable
+@implementation NSRDraggableViewManager
 
 RCT_EXPORT_MODULE()
 
@@ -25,7 +23,7 @@ RCT_EXPORT_VIEW_PROPERTY(onDragEnd, RCTDirectEventBlock)
 
 - (UIView *)view
 {
-  UIView *draggableView = [[RCTDraggableTextView alloc] initWithFrame:CGRectZero];
+  UIView *draggableView = [[NSRDraggableView alloc] initWithFrame:CGRectZero];
   return draggableView;
 }
 

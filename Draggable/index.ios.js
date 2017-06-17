@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { requireNativeComponent } from "react-native";
 
 export const DraggableWithoutFeedback = requireNativeComponent(
-  "RCTDraggable",
+  "NSRDraggableView",
   null
 );
 

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <React/RCTComponent.h>
 
-@interface RCTDraggableTextView : UIView
+@interface NSRDraggableView : UIView
 @property (nonatomic, strong) NSDictionary *content;
 @property (nonatomic, copy) RCTDirectEventBlock onDragBegan;
 @property (nonatomic, copy) RCTDirectEventBlock onDragEnd;
