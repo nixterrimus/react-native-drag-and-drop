@@ -34,6 +34,9 @@
   return [[UITargetedDragPreview alloc] initWithView:self parameters: params];
 }
 
+// TODO: The item provider emitted by this function can have multiple representations
+// I need to allow JS to send multiple representations, then I need to serialize
+// multiple representations into the NSItemProvider
 - (NSItemProvider *)itemForSharing:(NSDictionary *)content {
   if (@available(iOS 11.0, *)) {
     // Sharing Text
