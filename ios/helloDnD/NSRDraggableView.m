@@ -39,15 +39,7 @@
     // Sharing Text
     if (content[@"text"]){
       NSString *string = content[@"text"];
-      NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-      NSItemProvider *itemProvider = [[NSItemProvider  alloc] init];
-      [itemProvider
-       registerDataRepresentationForTypeIdentifier:(NSString *)kUTTypePlainText
-       visibility:NSItemProviderRepresentationVisibilityAll
-       loadHandler:^NSProgress * _Nullable(void (^ _Nonnull completionHandler)(NSData * _Nullable, NSError * _Nullable)) {
-         completionHandler(data, NULL);
-         return nil;
-       }];
+      NSItemProvider *itemProvider = [[NSItemProvider alloc]initWithObject:string];
       return itemProvider;
     }
 
