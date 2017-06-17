@@ -87,3 +87,23 @@ import { Draggable } from "draggable";
     <Text>Khan Academy</Text>
 </Draggable>
 ```
+
+Dragging more than one thing at once:
+
+```javascript
+<Draggable
+content={[
+    {
+    uri: "https://www.khanacademy.org/partner-content/pixar/simulation/hair-simulation-101/v/hair-simulation-intro"
+    },
+    {
+    uri: "https://www.khanacademy.org/partner-content/pixar/simulation/hair-simulation-101/v/sim1-fix"
+    },
+]}
+>
+    <Text>
+    🌐 Hair simulation 101 (2 videos)
+    </Text>
+</Draggable>
+
+```

@@ -85,14 +85,17 @@
 
 - (NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction itemsForBeginningSession:(id<UIDragSession>)session {
   if (@available(iOS 11.0, *)) {
-    NSItemProvider *itemProvider = [self itemForSharing:self.content];
+    NSMutableArray *dragItems = [[NSMutableArray alloc] initWithCapacity:self.content.count];
+    
+    for (NSDictionary *itemContent in self.content){
+      NSItemProvider * itemProvider = [self itemForSharing:itemContent];
+      UIDragItem *dragItem = [[UIDragItem alloc] initWithItemProvider:itemProvider];
+      [dragItems addObject:dragItem];
+    }
 
-    if (itemProvider != nil){
+    if (dragItems.count > 0){
       [self cancelCurrentReactTouch];
-
-      return @[
-           [[UIDragItem alloc] initWithItemProvider:itemProvider]
-       ];
+      return dragItems;
     } else {
       return @[];
     }
