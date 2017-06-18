@@ -85,11 +85,9 @@ export default class helloDnD extends Component {
 
         <Example title="Drag a URL">
           <Draggable
-            content={[
-              {
-                uri: "https://www.khanacademy.org/"
-              }
-            ]}
+            content={{
+              uri: "https://www.khanacademy.org/"
+            }}
           >
             <Text
               style={{
@@ -152,6 +150,32 @@ export default class helloDnD extends Component {
           </Draggable>
         </Example>
 
+        <Example title="Multiple Data representations">
+          <Draggable
+            content={[
+              [
+                {
+                  text: "The Transbay Tube is an underwater rail tunnel which carries Bay Area Rapid Transit's four transbay lines under San Francisco Bay between the cities of San Francisco and Oakland in California. The tube is 3.6 miles (5.8 km) long; including the approaches from the nearest stations (one of which is underground), it totals 6 miles (10 km) in length. It has a maximum depth of 135 feet (41 m) below sea level."
+                },
+                {
+                  uri: "https://en.wikipedia.org/wiki/Transbay_Tube"
+                }
+              ]
+            ]}
+          >
+            <Text
+              style={{
+                paddingVertical: 12,
+                paddingHorizontal: 22,
+                backgroundColor: "rgba(255,255,255,0.5)",
+                fontWeight: "600"
+              }}
+            >
+              The Transbay Tube is an underwater rail tunnel which carries Bay Area Rapid Transit's four transbay lines under San Francisco Bay between the cities of San Francisco and Oakland in California. The tube is 3.6 miles (5.8 km) long; including the approaches from the nearest stations (one of which is underground), it totals 6 miles (10 km) in length. It has a maximum depth of 135 feet (41 m) below sea level.
+            </Text>
+          </Draggable>
+        </Example>
+
         <Example title="Cancelling a touchable when a drag begins">
           <Draggable content={{ text: this.state.labelText }}>
             <View
@@ -194,7 +218,6 @@ export default class helloDnD extends Component {
             </View>
           </Draggable>
         </Example>
-
       </ScrollView>
     );
   }

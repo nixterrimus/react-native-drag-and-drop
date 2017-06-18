@@ -34,29 +34,28 @@
   return [[UITargetedDragPreview alloc] initWithView:self parameters: params];
 }
 
-// TODO: The item provider emitted by this function can have multiple representations
-// I need to allow JS to send multiple representations, then I need to serialize
-// multiple representations into the NSItemProvider
-- (NSItemProvider *)itemForSharing:(NSDictionary *)content {
+- (NSItemProvider *)itemForSharing:(NSArray *)contentItems {
   if (@available(iOS 11.0, *)) {
-    // Sharing Text
-    if (content[@"text"]){
-      NSString *string = content[@"text"];
-      NSItemProvider *itemProvider = [[NSItemProvider alloc]initWithObject:string];
-      return itemProvider;
+    NSItemProvider *itemProvider = [[NSItemProvider alloc] init];
+
+    for (NSDictionary *content in contentItems)
+    {
+      // Sharing Text
+      if (content[@"text"]){
+        NSString *string = content[@"text"];
+        [itemProvider registerObject:string visibility:NSItemProviderRepresentationVisibilityAll];
+      }
+
+      // Sharing URLs
+      else if (content[@"uri"]){
+        NSURL *url = [[NSURL alloc] initWithString:content[@"uri"]];
+        [itemProvider registerObject:url visibility:NSItemProviderRepresentationVisibilityAll];
+      }
     }
 
-    // Sharing URLs
-    else if (content[@"uri"]){
-      NSURL *url = [[NSURL alloc] initWithString:content[@"uri"]];
-      NSItemProvider *itemProvider = [[NSItemProvider alloc]initWithObject:url];
-      return itemProvider;
-    }
+    NSLog(@"%@", [itemProvider registeredTypeIdentifiers]);
+    return itemProvider;
 
-    // Sharing Something else, not possible
-    else {
-      return nil;
-    }
   } else {
     return nil;
   }
