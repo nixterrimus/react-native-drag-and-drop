@@ -4,11 +4,34 @@ import { requireNativeComponent } from "react-native";
 
 NativeDraggableItem = requireNativeComponent("NSRDraggableView", null);
 
+/*
+Returns:
+
+An array of arrays representing:
+
+[
+  //Item to drag,
+  //Item to drag,
+  //Item to drag [
+    // Data Representation
+    // Data Representation
+  ]
+]
+*/
 function mapInputContentToNativeContent(content) {
+  let contentItems;
   if (Array.isArray(content)) {
-    return content;
+    contentItems = content;
+  } else {
+    contentItems = [content];
   }
-  return [content];
+
+  return contentItems.map(data => {
+    if (Array.isArray(data)) {
+      return data
+    }
+    return [data];
+  });
 }
 
 export const DraggableWithoutFeedback = props => {
@@ -16,7 +39,7 @@ export const DraggableWithoutFeedback = props => {
     ...props,
     content: mapInputContentToNativeContent(props.content)
   };
-  
+
   return <NativeDraggableItem {...propsForNativeView} />;
 };
 
